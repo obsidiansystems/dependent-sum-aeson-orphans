@@ -8,6 +8,7 @@ copyright: 2018 Obsidian Systems LLC
 build-type: Simple
 extra-source-files: ChangeLog.md
 cabal-version: >=1.10
+description: JSON instances for DSum and DMap
 
 library
   exposed-modules: Data.Dependent.Sum.Orphans
