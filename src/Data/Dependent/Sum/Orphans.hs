@@ -23,7 +23,7 @@ instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DSum f g) where
 instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DMap f g) where
     toJSON = toJSON . DMap.toList
 
-instance (FromJSON (Some f), GCompare f, Has' FromJSON f g) => FromJSON (DSum f g) where
+instance (FromJSON (Some f), Has' FromJSON f g) => FromJSON (DSum f g) where
   parseJSON x = do
     (jf, jg) <- parseJSON x
     Some.This (f :: f a) <- parseJSON jf
