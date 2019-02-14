@@ -6,7 +6,6 @@ author: Obsidian Systems
 maintainer: maintainer@obsidian.systems
 copyright: 2018 Obsidian Systems LLC
 build-type: Simple
-extra-source-files: ChangeLog.md
 cabal-version: >=1.10
 description: JSON instances for DSum and DMap
 
