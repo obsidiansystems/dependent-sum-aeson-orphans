@@ -10,9 +10,12 @@ import Data.Aeson
 import Data.Constraint
 import Data.Constraint.Forall
 import Data.Constraint.Extras
-import Data.Dependent.Map (DMap, GCompare)
+import Data.Dependent.Map (DMap)
 import qualified Data.Dependent.Map as DMap
+import Data.Dependent.Map.NonEmpty (NonEmptyDMap)
+import qualified Data.Dependent.Map.NonEmpty as NonEmptyDMap
 import Data.Dependent.Sum
+import Data.GADT.Compare (GCompare)
 import Data.Some (Some)
 import qualified Data.Some as Some
 
@@ -23,6 +26,9 @@ instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DSum f g) where
 instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DMap f g) where
     toJSON = toJSON . DMap.toList
 
+instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (NonEmptyDMap f g) where
+    toJSON = toJSON . NonEmptyDMap.toList
+
 instance (FromJSON (Some f), Has' FromJSON f g) => FromJSON (DSum f g) where
   parseJSON x = do
     (jf, jg) <- parseJSON x
@@ -32,3 +38,6 @@ instance (FromJSON (Some f), Has' FromJSON f g) => FromJSON (DSum f g) where
 
 instance (FromJSON (Some f), GCompare f, Has' FromJSON f g) => FromJSON (DMap f g) where
     parseJSON = fmap DMap.fromList . parseJSON
+
+instance (FromJSON (Some f), GCompare f, Has' FromJSON f g) => FromJSON (NonEmptyDMap f g) where
+    parseJSON = fmap NonEmptyDMap.fromList . parseJSON
