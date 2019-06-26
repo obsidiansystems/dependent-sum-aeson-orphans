@@ -13,7 +13,7 @@ import Data.Constraint.Extras
 import Data.Dependent.Map (DMap, GCompare)
 import qualified Data.Dependent.Map as DMap
 import Data.Dependent.Sum
-import Data.Some (Some)
+import Data.Some (Some(Some))
 import qualified Data.Some as Some
 
 instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DSum f g) where
