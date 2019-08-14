@@ -32,3 +32,6 @@ instance (FromJSON (Some f), Has' FromJSON f g) => FromJSON (DSum f g) where
 
 instance (FromJSON (Some f), GCompare f, Has' FromJSON f g) => FromJSON (DMap f g) where
     parseJSON = fmap DMap.fromList . parseJSON
+
+instance (ForallF ToJSON f) => ToJSON (Some f) where
+ toJSON (Some.Some (f :: f a)) = whichever @ToJSON @f @a (toJSON f)
