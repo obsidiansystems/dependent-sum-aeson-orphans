@@ -34,4 +34,4 @@ instance (FromJSON (Some f), GCompare f, Has' FromJSON f g) => FromJSON (DMap f 
     parseJSON = fmap DMap.fromList . parseJSON
 
 instance (ForallF ToJSON f) => ToJSON (Some f) where
- toJSON (Some.Some (f :: f a)) = whichever @ToJSON @f @a (toJSON f)
+    toJSON (Some.Some (f :: f a)) = whichever @ToJSON @f @a (toJSON f)
