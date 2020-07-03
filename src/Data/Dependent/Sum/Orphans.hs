@@ -10,7 +10,8 @@ import Data.Aeson
 import Data.Constraint
 import Data.Constraint.Forall
 import Data.Constraint.Extras
-import Data.Dependent.Map (DMap, GCompare)
+import Data.Dependent.Map (DMap)
+import Data.GADT.Compare (GCompare)
 import qualified Data.Dependent.Map as DMap
 import Data.Dependent.Sum
 import Data.Some (Some(Some))
@@ -26,7 +27,7 @@ instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DMap f g) where
 instance (FromJSON (Some f), Has' FromJSON f g) => FromJSON (DSum f g) where
   parseJSON x = do
     (jf, jg) <- parseJSON x
-    Some.This (f :: f a) <- parseJSON jf
+    Some (f :: f a) <- parseJSON jf
     g <- has' @FromJSON @g f (parseJSON jg)
     return $ f :=> g
 
