@@ -4,18 +4,19 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Data.Dependent.Sum.Orphans where
 
 import Data.Aeson
-import Data.Constraint
 import Data.Constraint.Forall
 import Data.Constraint.Extras
-import Data.Dependent.Map (DMap, GCompare)
+import Data.Dependent.Map (DMap)
+import Data.GADT.Compare (GCompare)
 import qualified Data.Dependent.Map as DMap
 import Data.Dependent.Sum
-import Data.Some (Some(Some))
-import qualified Data.Some as Some
+import Data.Some (withSomeM, withSome, Some)
 
 instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DSum f g) where
   toJSON ((f :: f a) :=> (g :: g a))
@@ -27,12 +28,12 @@ instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DMap f g) where
 instance (FromJSON (Some f), Has' FromJSON f g) => FromJSON (DSum f g) where
   parseJSON x = do
     (jf, jg) <- parseJSON x
-    Some.This (f :: f a) <- parseJSON jf
-    g <- has' @FromJSON @g f (parseJSON jg)
-    return $ f :=> g
+    withSomeM (parseJSON jf) $ \(f :: f a) -> do
+      g <- has' @FromJSON @g f (parseJSON jg)
+      return $ f :=> g
 
 instance (FromJSON (Some f), GCompare f, Has' FromJSON f g) => FromJSON (DMap f g) where
     parseJSON = fmap DMap.fromList . parseJSON
 
 instance (ForallF ToJSON r) => ToJSON (Some r) where
-  toJSON (Some (x :: r a)) = whichever @ToJSON @r @a (toJSON x)
+  toJSON some = withSome some $ \(x :: r a) -> whichever @ToJSON @r @a (toJSON x)
