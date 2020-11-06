@@ -3,16 +3,18 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Data.Dependent.Sum.Orphans where
 
 import Data.Aeson
-import Data.Constraint
 import Data.Constraint.Forall
 import Data.Constraint.Extras
-import Data.Dependent.Map (DMap, GCompare)
+import Data.Dependent.Map (DMap)
 import qualified Data.Dependent.Map as DMap
 import Data.Dependent.Sum
+import Data.GADT.Compare (GCompare)
 import Data.Some (Some(Some))
 import qualified Data.Some as Some
 
@@ -26,7 +28,7 @@ instance (ForallF ToJSON f, Has' ToJSON f g) => ToJSON (DMap f g) where
 instance (FromJSON (Some f), Has' FromJSON f g) => FromJSON (DSum f g) where
   parseJSON x = do
     (jf, jg) <- parseJSON x
-    Some.This (f :: f a) <- parseJSON jf
+    Some.Some (f :: f a) <- parseJSON jf
     g <- has' @FromJSON @g f (parseJSON jg)
     return $ f :=> g
 
