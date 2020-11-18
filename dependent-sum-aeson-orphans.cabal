@@ -15,8 +15,8 @@ tested-with:   GHC ==8.2.2 || ==8.4.4 || ==8.6.5 || ==8.8.4
 library
   exposed-modules:  Data.Dependent.Sum.Orphans
   build-depends:
-      aeson               >=1.2    && <1.5
-    , base                >=4.9    && <4.14
+      aeson               >=1.2    && <1.6
+    , base                >=4.9    && <4.15
     , constraints         >=0.10.1 && <0.13
     , constraints-extras  >=0.3.0  && <0.4
     , dependent-map       >=0.3    && <0.5
