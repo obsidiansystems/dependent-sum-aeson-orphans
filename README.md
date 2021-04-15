@@ -1,3 +1,4 @@
-# dependent-sum-aeson-orphans [![travis-ci](https://travis-ci.org/obsidiansystems/dependent-sum-aeson-orphans.svg?branch=develop)](https://travis-ci.org/obsidiansystems/dependent-sum-aeson-orphans)
+# dependent-sum-aeson-orphans
+[![Haskell](https://img.shields.io/badge/language-Haskell-orange.svg)](https://haskell.org) [![Hackage](https://img.shields.io/hackage/v/dependent-sum-aeson-orphans.svg)](https://hackage.haskell.org/package/dependent-sum-aeson-orphans) [![Hackage CI](https://matrix.hackage.haskell.org/api/v2/packages/dependent-sum-aeson-orphans/badge)](https://matrix.hackage.haskell.org/#/package/dependent-sum-aeson-orphans) [![Github CI](https://github.com/obsidiansystems/dependent-sum-aeson-orphans/workflows/github-action/badge.svg)](https://github.com/obsidiansystems/dependent-sum-aeson-orphans/actions) [![BSD3 License](https://img.shields.io/badge/license-BSD3-blue.svg)](https://github.com/obsidiansystems/dependent-sum-aeson-orphans/blob/master/LICENSE)
 
 JSON instances for DSum and DMap
