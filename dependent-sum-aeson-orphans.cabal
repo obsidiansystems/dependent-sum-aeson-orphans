@@ -5,6 +5,7 @@ license-file:  LICENSE
 author:        Obsidian Systems
 maintainer:    maintainer@obsidian.systems
 copyright:     2020 Obsidian Systems LLC
+homepage:      https://github.com/obsidiansystems/dependent-sum-aeson-orphans
 build-type:    Simple
 cabal-version: >=1.10
 description:   JSON instances for DSum, DMap, and Some.
