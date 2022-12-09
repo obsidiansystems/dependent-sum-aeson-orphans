@@ -5,6 +5,7 @@ This project's release branch is `master`. This log is written from the perspect
 ## 0.3.1.1
 
 * Loosen version bounds
+* Drop official support for GHC<8.6.5
 
 ## 0.3.1.0
 
