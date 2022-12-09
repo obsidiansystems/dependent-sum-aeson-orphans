@@ -2,6 +2,10 @@
 
 This project's release branch is `master`. This log is written from the perspective of the release branch: when changes hit `master`, they are considered released, and the date should reflect that release.
 
+## 0.3.1.1
+
+* Loosen version bounds
+
 ## 0.3.1.0
 
 * Enable PolyKinds. This is necessary to allow DSums where the key and value range over types other than `*`.
