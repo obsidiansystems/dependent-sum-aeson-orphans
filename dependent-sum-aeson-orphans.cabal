@@ -17,7 +17,7 @@ library
   exposed-modules:  Data.Dependent.Sum.Orphans
   build-depends:
       aeson               >=1.2    && <2.3
-    , base                >=4.9    && <4.21
+    , base                >=4.9    && <4.22
     , constraints         >=0.10.1 && <0.15
     , constraints-extras  >=0.3.0  && <0.5
     , dependent-map       >=0.3    && <0.5
