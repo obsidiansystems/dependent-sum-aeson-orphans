@@ -2,6 +2,10 @@
 
 This project's release branch is `master`. This log is written from the perspective of the release branch: when changes hit `master`, they are considered released, and the date should reflect that release.
 
+## 0.3.1.2
+
+* Support GHC 9.12
+
 ## 0.3.1.1
 
 * Loosen version bounds
